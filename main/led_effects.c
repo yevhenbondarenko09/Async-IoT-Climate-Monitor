@@ -45,9 +45,9 @@ static void led_breathing_task(void *pvParameters){
     while(1){
   if (current_mode == LED_MODE_BREATHING) {
     duty+=step;
-    if (duty >= LEDC_DUTY_MAX) {duty = LEDC_DUTY_MAX; step = -5;} 
-    else if (duty <= LEDC_DUTY_MIN) {duty = LEDC_DUTY_MIN; step = 5;}}
-else if (current_mode == LED_MODE_BLINKING) {
+        if (duty >= LEDC_DUTY_MAX) {duty = LEDC_DUTY_MAX; step = -5;} 
+        else if (duty <= LEDC_DUTY_MIN) {duty = LEDC_DUTY_MIN; step = 5;}}
+ else if (current_mode == LED_MODE_BLINKING) {
             blink_counter++;
             if (blink_counter >= 10) { // Кожні 10 циклів (150 мс)
                 duty = (duty == 0) ? LEDC_DUTY_MAX : LEDC_DUTY_MIN; // Перемикаємо 0 або 1023
