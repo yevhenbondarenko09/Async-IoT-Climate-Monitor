@@ -82,12 +82,14 @@ void network_mqtt_task(void *pvParameters) {
     while (1) {
         
         if (xQueueReceive(queue, &msg, portMAX_DELAY) == pdPASS) {
+             float seconds = (float)msg.timestamp / configTICK_RATE_HZ;
             
-            sprintf(json_buffer, "{\"temp\": %.2f, \"hum\": %.2f, \"time\": %lu}",
-                    msg.sensor_data.temp,
-                    msg.sensor_data.humidity,
-                    msg.timestamp);
 
+            snprintf(json_buffer, sizeof(json_buffer), 
+            "{\"temp\": %.2f, \"hum\": %.2f, \"time\": %.2f}",
+            msg.sensor_data.temp,
+            msg.sensor_data.humidity,
+            seconds);    
 
             mqtt_send_data(json_buffer);
         }
