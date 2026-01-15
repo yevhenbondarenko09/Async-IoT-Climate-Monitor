@@ -6,9 +6,10 @@
 #include "nvs_flash.h"
 
 #include "led_effects.h"
-#include "app_tasks.h"
+#include "sensor_task.h"
 #include "sht30.h"
 #include "wifi_app.h"
+#include "mqtt_app.h"
 
 static const char *TAG = "MAIN_APP";
 QueueHandle_t sensor_queue = NULL;
@@ -33,7 +34,7 @@ void app_main(void)
         ESP_LOGI(TAG, "SHT30 ініціалізовано успішно");
         led_set_mode(LED_MODE_BREATHING); 
     }
-    
+
     ESP_LOGI(TAG, "Запуск Wi-Fi...");
     wifi_init_sta();
 
@@ -42,6 +43,10 @@ void app_main(void)
         ESP_LOGE(TAG, "Помилка створення черги!");
         led_set_mode(LED_MODE_BLINKING);
     }
-    else{start_sensor_task(sensor_queue);}
+    else{
+        start_sensor_task(sensor_queue);
+        mqtt_app_start();
+        start_network_mqtt_task(sensor_queue);
+    }
  }
 

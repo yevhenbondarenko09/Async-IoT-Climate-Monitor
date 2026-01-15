@@ -1,5 +1,5 @@
-#ifndef APP_TASKS_H
-#define APP_TASKS_H
+#ifndef SENSOR_TASK_H
+#define SENSOR_TASK_H
 
 // Обов'язкові інклюди для FreeRTOS типів
 #include "freertos/FreeRTOS.h"

@@ -35,9 +35,11 @@ err=ledc_channel_config(&channel_conf);
 if(err!=ESP_OK) return err;
 return ESP_OK;
 }
+
 void led_set_mode(led_mode_t mode) {
     current_mode = mode;
 }
+
 static void led_breathing_task(void *pvParameters){
     int duty = 0;
     int step = 5;
