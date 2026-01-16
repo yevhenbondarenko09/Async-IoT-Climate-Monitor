@@ -46,29 +46,27 @@ graph LR
     style SensorTask fill:#f9f,stroke:#333,stroke-width:2px
     style NetTask fill:#bbf,stroke:#333,stroke-width:2px
     style Queue fill:#ff9,stroke:#333,stroke-width:1px
+```
 
-Functional Layers.
+##  Functional Layers
+
 The firmware is structured into logical layers to ensure maintainability and scalability:
 
-1. Sensor Layer
-Custom I2C Driver: Implementation of raw I2C communication for the SHT30 sensor.
+### 1. Sensor Layer
+* **Custom I2C Driver:** Implementation of raw I2C communication for the SHT30 sensor.
+* **Features:** Command transmission, 6-byte data readout, and raw data parsing using bitwise operations (MSB/LSB concatenation).
 
-Features: Command transmission, 6-byte data readout, and raw data parsing using bitwise operations (MSB/LSB concatenation).
+### 2. Indication Layer
+* **Non-blocking LED Control:** Uses hardware PWM (LEDC peripheral) instead of simple delays.
+* **Statuses:** Visual feedback for system states (Connecting, Error, Working/Breathing).
 
-2. Indication Layer
-Non-blocking LED Control: Uses hardware PWM (LEDC peripheral) instead of simple delays.
+### 3. Application Layer (RTOS)
+* **Task Separation:** Decoupled data collection and data transmission logic.
+* **Synchronization:** Robust use of FreeRTOS primitives (Tasks, Queues, Event Groups).
 
-Statuses: Visual feedback for system states (Connecting, Error, Working/Breathing).
-
-3. Application Layer (RTOS)
-Task Separation: Decoupled data collection and data transmission logic.
-
-Synchronization: Robust use of FreeRTOS primitives (Tasks, Queues, Event Groups).
-
-4. Network Layer
-Connectivity: Wi-Fi Station Mode with auto-reconnect logic.
-
-Telemetry: Formatting data into JSON and publishing to an MQTT Broker via TCP/IP.
+### 4. Network Layer
+* **Connectivity:** Wi-Fi Station Mode with auto-reconnect logic.
+* **Telemetry:** Formatting data into JSON and publishing to an MQTT Broker via TCP/IP.
 
 
 ##  Tech Stack (Hard Skills)
@@ -108,13 +106,14 @@ Telemetry: Formatting data into JSON and publishing to an MQTT Broker via TCP/IP
 ![MQTT Dashboard](./images/mqtt.PNG)
 
 
-Future Improvements
-[ ] Implement CRC8 checksum verification for data integrity.
+##  Future Improvements
 
-[ ] Add Deep Sleep mode for power saving.
+-  Implement CRC8 checksum verification for data integrity.
+-  Add Deep Sleep mode for power saving.
+-  Implement OTA (Over-the-Air) firmware updates.
+-  Store history in NVS (Flash memory) when Wi-Fi is lost.
 
-[ ] Implement OTA (Over-the-Air) firmware updates.
-
-[ ] Store history in NVS (Flash memory) when Wi-Fi is lost.
-
-Created by Yevhen Bondarenko.
+---
+<div align="center">
+    <b>Created by Yevhen Bondarenko</b>
+</div>
