@@ -5,8 +5,8 @@
 #include "freertos/event_groups.h"
 #include "esp_err.h"
 
-#define ESP_WIFI_SSID      "TP-Link_6780"
-#define ESP_WIFI_PASS      "78579170"
+#define ESP_WIFI_SSID      "Your_SSID"
+#define ESP_WIFI_PASS      "Your_PASSWORD"
 #define ESP_MAXIMUM_RETRY  5
 
 
