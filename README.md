@@ -106,6 +106,11 @@ The firmware is structured into logical layers to ensure maintainability and sca
 ![MQTT Dashboard](./images/mqtt.PNG)
 
 
+### Web Interface
+*Responsive mobile dashboard for real-time sensor data visualization:*
+
+<img src="./images/website.jpg" alt="Web Interface" width="50%">
+
 ##  Future Improvements
 
 -  Implement CRC8 checksum verification for data integrity.
